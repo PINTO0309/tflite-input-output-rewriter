@@ -34,10 +34,10 @@ class Color:
 
 def rewrite(
     *,
-    tflite_file,
-    view_mode,
-    output_path,
-    rename_list,
+    tflite_file: str,
+    view_mode: bool,
+    output_path: str,
+    rename_list: List[List[str]],
 ):
     FBS_FILE_NAME: str = f'schema.fbs'
     URL: str = f'https://raw.githubusercontent.com/tensorflow/tensorflow/v2.13.0-rc1/tensorflow/lite/schema/{FBS_FILE_NAME}'
