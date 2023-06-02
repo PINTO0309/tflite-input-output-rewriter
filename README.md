@@ -43,7 +43,7 @@ optional arguments:
 
   -r RENAME RENAME, --rename RENAME RENAME
       Replace with any specified name.
-      --rename {from_name1} {to_name1} --rename {from_name2} {to_name2} --rename {from_name3} {to_name3}
+      --rename {from_name1} {to_name1} --rename {from_name2} {to_name2} ...
       --rename serving_default_input_1:0 aaa --rename StatefulPartitionedCall:0 bbb
 ```
 
