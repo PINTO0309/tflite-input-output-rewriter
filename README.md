@@ -8,7 +8,7 @@ This tool displays tflite signatures and rewrites the input/output OP name to th
 ## Motivation
 The purpose is to solve the following problems by forcibly rewriting tflite's input/output OP names.
 
-- When TFLite models are generated, TensorFlow automatically prefixes the input OP name with `serving_default_`, resulting in very difficult-to-read models.
+- When TFLite models are generated, TensorFlow automatically prefixes the input OP name with `serving_default_`, resulting in very difficult-to-read models. Also, an unnecessary index `:n` is added to the end of the name.
 
   ![01](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/c83f4722-aca6-4fd6-910e-b23b20357706)
 
