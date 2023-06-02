@@ -16,6 +16,8 @@ This tool displays tflite signatures and rewrites the input/output OP name to th
 
 ## Execution
 ```bash
+sudo apt-get update && sudo apt-get install -y flatbuffers-compiler
+
 python main.py -i xxxx.tflite
 ```
 
