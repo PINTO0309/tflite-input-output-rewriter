@@ -39,8 +39,9 @@ def rewrite(
     output_path: str,
     rename_list: List[List[str]],
 ):
+    TF_VER: str = 'v2.13.0-rc1'
     FBS_FILE_NAME: str = f'schema.fbs'
-    URL: str = f'https://raw.githubusercontent.com/tensorflow/tensorflow/v2.13.0-rc1/tensorflow/lite/schema/{FBS_FILE_NAME}'
+    URL: str = f'https://raw.githubusercontent.com/tensorflow/tensorflow/{TF_VER}/tensorflow/lite/schema/{FBS_FILE_NAME}'
 
     # Download schema.fbs
     if not os.path.exists(FBS_FILE_NAME):
