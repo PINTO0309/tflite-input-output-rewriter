@@ -56,10 +56,21 @@ def main():
         default='.',
         help='Output tflite file folder path.'
     )
+    parser.add_argument(
+        '-r',
+        '--rename',
+        type=str,
+        nargs=2,
+        action='append',
+        help=\
+            'Replace with any specified name. ' +
+            '--rename {from_name1} {to_name1} --rename {from_name2} {to_name2} --rename {from_name3} {to_name3}'
+    )
     args = parser.parse_args()
     TFLITE_FILE: str = args.input_tflite_file_path
     view_mode: bool = args.view
     OUTPUT_PATH: str = args.output_folder_path
+    rename_list: List[List[str]] = args.rename
     FBS_FILE_NAME: str = f'schema.fbs'
     URL: str = f'https://raw.githubusercontent.com/tensorflow/tensorflow/v2.13.0-rc1/tensorflow/lite/schema/{FBS_FILE_NAME}'
 
@@ -126,14 +137,45 @@ def main():
         # If the signature of the input OP and the signature of the output OP overlap,
         # rename the signature of the output OP.
         if not view_mode:
-            for flat_signature_def_outputs_name in flat_signature_def_outputs_names:
-                if flat_signature_def_outputs_name in flat_signature_def_inputs_names:
-                    rename_target_output = [
-                        flat_signature_def_output \
-                            for flat_signature_def_output in flat_signature_def_outputs \
-                                if flat_signature_def_output['name'] == flat_signature_def_outputs_name
-                    ][0]
-                    rename_target_output['name'] = f'output_{flat_signature_def_outputs_name}'
+            if not rename_list:
+                # Override OP name by name in signature_defs
+                for flat_signature_def_outputs_name in flat_signature_def_outputs_names:
+                    if flat_signature_def_outputs_name in flat_signature_def_inputs_names:
+                        rename_target_output = [
+                            flat_signature_def_output \
+                                for flat_signature_def_output in flat_signature_def_outputs \
+                                    if flat_signature_def_output['name'] == flat_signature_def_outputs_name
+                        ][0]
+                        rename_target_output['name'] = f'output_{flat_signature_def_outputs_name}'
+            else:
+                # Override OP name by name in rename_list
+                for flat_signature_def_input in flat_signature_def_inputs:
+                    tensor_index: int = flat_signature_def_input.get('tensor_index', -1)
+                    input_flat_tensor = [
+                        flat_tensor \
+                            for flat_tensor in flat_tensors \
+                                if int(flat_tensor['buffer']) == tensor_index + 1
+                    ]
+                    if input_flat_tensor:
+                        input_flat_tensor = input_flat_tensor[0]
+                        for rename_set in rename_list:
+                            # rename_set[0]: From, rename_set[1]: To
+                            if input_flat_tensor['name'] == rename_set[0]:
+                                flat_signature_def_input['name'] = rename_set[1]
+
+                for flat_signature_def_output in flat_signature_def_outputs:
+                    tensor_index: int = flat_signature_def_output.get('tensor_index', -1)
+                    output_flat_tensor = [
+                        flat_tensor \
+                            for flat_tensor in flat_tensors \
+                                if int(flat_tensor['buffer']) == tensor_index + 1
+                    ]
+                    if output_flat_tensor:
+                        output_flat_tensor = output_flat_tensor[0]
+                        for rename_set in rename_list:
+                            # rename_set[0]: From, rename_set[1]: To
+                            if output_flat_tensor['name'] == rename_set[0]:
+                                flat_signature_def_output['name'] = rename_set[1]
 
             # Rewrite input op names
             print('')

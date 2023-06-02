@@ -23,7 +23,7 @@ sudo apt-get update && sudo apt-get install -y flatbuffers-compiler
 python main.py -i xxxx.tflite
 ```
 ```
-usage: main.py [-h] -i INPUT_TFLITE_FILE_PATH [-v] [-o OUTPUT_FOLDER_PATH]
+usage: main.py [-h] -i INPUT_TFLITE_FILE_PATH [-v] [-o OUTPUT_FOLDER_PATH] [-r RENAME RENAME]
 
 optional arguments:
   -h, --help
@@ -38,6 +38,11 @@ optional arguments:
 
   -o OUTPUT_FOLDER_PATH, --output_folder_path OUTPUT_FOLDER_PATH
       Output tflite file folder path.
+
+  -r RENAME RENAME, --rename RENAME RENAME
+      Replace with any specified name.
+      --rename {from_name1} {to_name1} --rename {from_name2} {to_name2} --rename {from_name3} {to_name3}
+      --rename serving_default_input_1:0 aaa --rename StatefulPartitionedCall:0 bbb
 ```
 
 ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/d676da7d-533f-4fca-b5c5-09a737ffb118)
@@ -58,3 +63,12 @@ optional arguments:
 python main.py -i xxxx.tflite -v
 ```
 ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/0d43d93d-647d-40f1-b464-662e39dcf228)
+
+## Rename Mode Result
+Replace with any name by specifying `{From}` and `{To}` in the `--renmae (-r)` option.
+```bash
+python main.py \
+-i xxxx.tflite \
+-r serving_default_input_1:0 aaa \
+-r StatefulPartitionedCall:0 bbb
+```
