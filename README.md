@@ -31,6 +31,8 @@ optional arguments:
 
   -i INPUT_TFLITE_FILE_PATH, --input_tflite_file_path INPUT_TFLITE_FILE_PATH
       Input tflite file path.
+      If `--rename` is not used, the input/output OP name is overwritten with the definition
+      information in signature_defs.
 
   -v, --view
       Runs in a mode that only displays the signature_defs recorded in the model.
