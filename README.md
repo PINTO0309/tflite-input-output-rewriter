@@ -23,17 +23,22 @@ sudo apt-get update && sudo apt-get install -y flatbuffers-compiler
 python main.py -i xxxx.tflite
 ```
 ```
-usage: main.py [-h] -i INPUT_TFLITE_FILE_PATH [-o OUTPUT_FOLDER_PATH]
+usage: main.py [-h] -i INPUT_TFLITE_FILE_PATH [-v] [-o OUTPUT_FOLDER_PATH]
 
 optional arguments:
   -h, --help
       show this help message and exit
+
   -i INPUT_TFLITE_FILE_PATH, --input_tflite_file_path INPUT_TFLITE_FILE_PATH
       Input tflite file path.
+
+  -v, --view
+      Runs in a mode that only displays the signature_defs recorded in the model.
+      This mode does not rewrite the model.
+
   -o OUTPUT_FOLDER_PATH, --output_folder_path OUTPUT_FOLDER_PATH
       Output tflite file folder path.
 ```
-
 
 ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/d676da7d-533f-4fca-b5c5-09a737ffb118)
 
@@ -47,3 +52,8 @@ optional arguments:
 - Outputs
 
   ![04](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/bedffe08-c072-4b07-af8f-d763a2708907)
+
+## View Mode Result
+```bash
+python main.py -i xxxx.tflite -v
+```
