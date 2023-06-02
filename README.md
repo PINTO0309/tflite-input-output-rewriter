@@ -66,9 +66,19 @@ python main.py -i xxxx.tflite -v
 
 ## Rename Mode Result
 Replace with any name by specifying `{From}` and `{To}` in the `--renmae (-r)` option.
+
+- Before
+
+  ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/61195485-a756-4449-8bf2-4d9e83f06feb)
+
 ```bash
 python main.py \
 -i xxxx.tflite \
 -r serving_default_input_1:0 aaa \
 -r StatefulPartitionedCall:0 bbb
 ```
+
+- After
+
+  ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/b339856a-63aa-46bf-9e3c-4f65198b346a)
+
