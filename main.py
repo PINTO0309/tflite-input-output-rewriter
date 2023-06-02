@@ -32,45 +32,13 @@ class Color:
     RESET          = '\033[0m'
 
 
-def main():
-    parser = ArgumentParser()
-    parser.add_argument(
-        '-i',
-        '--input_tflite_file_path',
-        required=True,
-        type=str,
-        help='Input tflite file path.'
-    )
-    parser.add_argument(
-        '-v',
-        '--view',
-        action='store_true',
-        help=\
-            'Runs in a mode that only displays the signature_defs recorded in the model. ' +
-            'This mode does not rewrite the model.'
-    )
-    parser.add_argument(
-        '-o',
-        '--output_folder_path',
-        type=str,
-        default='.',
-        help='Output tflite file folder path.'
-    )
-    parser.add_argument(
-        '-r',
-        '--rename',
-        type=str,
-        nargs=2,
-        action='append',
-        help=\
-            'Replace with any specified name. ' +
-            '--rename {from_name1} {to_name1} --rename {from_name2} {to_name2} --rename {from_name3} {to_name3}'
-    )
-    args = parser.parse_args()
-    TFLITE_FILE: str = args.input_tflite_file_path
-    view_mode: bool = args.view
-    OUTPUT_PATH: str = args.output_folder_path
-    rename_list: List[List[str]] = args.rename
+def rewrite(
+    *,
+    tflite_file,
+    view_mode,
+    output_path,
+    rename_list,
+):
     FBS_FILE_NAME: str = f'schema.fbs'
     URL: str = f'https://raw.githubusercontent.com/tensorflow/tensorflow/v2.13.0-rc1/tensorflow/lite/schema/{FBS_FILE_NAME}'
 
@@ -94,19 +62,19 @@ def main():
                 'flatc', '-t',
                 '--strict-json',
                 '--defaults-json',
-                '-o', f'{OUTPUT_PATH}',
-                f'{OUTPUT_PATH}/{FBS_FILE_NAME}',
+                '-o', f'{output_path}',
+                f'{output_path}/{FBS_FILE_NAME}',
                 '--',
-                f'{OUTPUT_PATH}/{TFLITE_FILE}',
+                f'{output_path}/{tflite_file}',
             ],
             stderr=subprocess.PIPE
         ).decode('utf-8')
 
         # Rewrite input OP name and output OP name
-        input_json_file_name = f'{os.path.splitext(os.path.basename(TFLITE_FILE))[0]}.json'
-        input_json_file_path = f'{OUTPUT_PATH}/{input_json_file_name}'
-        output_json_file_name = f'{os.path.splitext(os.path.basename(TFLITE_FILE))[0]}_renamed.json'
-        output_json_file_path = f'{OUTPUT_PATH}/{output_json_file_name}'
+        input_json_file_name = f'{os.path.splitext(os.path.basename(tflite_file))[0]}.json'
+        input_json_file_path = f'{output_path}/{input_json_file_name}'
+        output_json_file_name = f'{os.path.splitext(os.path.basename(tflite_file))[0]}_renamed.json'
+        output_json_file_path = f'{output_path}/{output_json_file_name}'
         flat_json = None
 
         with open(input_json_file_path, 'r') as f:
@@ -265,8 +233,8 @@ def main():
         _ = subprocess.check_output(
             [
                 'flatc',
-                '-o', f'{OUTPUT_PATH}',
-                '-b', f'{OUTPUT_PATH}/schema.fbs',
+                '-o', f'{output_path}',
+                '-b', f'{output_path}/schema.fbs',
                 f'{output_json_file_path}'
             ],
             stderr=subprocess.PIPE
@@ -284,5 +252,49 @@ def main():
             'Other than debian/ubuntu: https://github.com/google/flatbuffers/releases'
         )
 
+
 if __name__ == '__main__':
-    main()
+    parser = ArgumentParser()
+    parser.add_argument(
+        '-i',
+        '--input_tflite_file_path',
+        required=True,
+        type=str,
+        help='Input tflite file path.'
+    )
+    parser.add_argument(
+        '-v',
+        '--view',
+        action='store_true',
+        help=\
+            'Runs in a mode that only displays the signature_defs recorded in the model. ' +
+            'This mode does not rewrite the model.'
+    )
+    parser.add_argument(
+        '-o',
+        '--output_folder_path',
+        type=str,
+        default='.',
+        help='Output tflite file folder path.'
+    )
+    parser.add_argument(
+        '-r',
+        '--rename',
+        type=str,
+        nargs=2,
+        action='append',
+        help=\
+            'Replace with any specified name. ' +
+            '--rename {from_name1} {to_name1} --rename {from_name2} {to_name2} --rename {from_name3} {to_name3}'
+    )
+    args = parser.parse_args()
+    tflite_file: str = args.input_tflite_file_path
+    view_mode: bool = args.view
+    output_path: str = args.output_folder_path
+    rename_list: List[List[str]] = args.rename
+    rewrite(
+        tflite_file=tflite_file,
+        view_mode=view_mode,
+        output_path=output_path,
+        rename_list=rename_list,
+    )
