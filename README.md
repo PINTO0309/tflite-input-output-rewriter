@@ -22,6 +22,9 @@ sudo apt-get update && sudo apt-get install -y flatbuffers-compiler
 
 python main.py -i xxxx.tflite
 ```
+![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/d676da7d-533f-4fca-b5c5-09a737ffb118)
+
+![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/d58dca0f-ac51-4545-b49b-32f22e7a39ad)
 
 ## Execution Result
 - Inputs
