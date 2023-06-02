@@ -1,2 +1,2 @@
-# tflite-signature-viewer-renamer
-A tool that just displays tflite signatures.
+# tflite-input-output-rewriter
+This tool displays tflite signatures and rewrites the input/output OP name to the name of the signature.
