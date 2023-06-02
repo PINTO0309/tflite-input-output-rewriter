@@ -57,11 +57,11 @@ def main():
         help='Output tflite file folder path.'
     )
     args = parser.parse_args()
-    TFLITE_FILE = args.input_tflite_file_path
-    view_mode = args.view
-    OUTPUT_PATH = args.output_folder_path
-    FBS_FILE_NAME = f'schema.fbs'
-    URL = f'https://raw.githubusercontent.com/tensorflow/tensorflow/v2.13.0-rc1/tensorflow/lite/schema/{FBS_FILE_NAME}'
+    TFLITE_FILE: str = args.input_tflite_file_path
+    view_mode: bool = args.view
+    OUTPUT_PATH: str = args.output_folder_path
+    FBS_FILE_NAME: str = f'schema.fbs'
+    URL: str = f'https://raw.githubusercontent.com/tensorflow/tensorflow/v2.13.0-rc1/tensorflow/lite/schema/{FBS_FILE_NAME}'
 
     # Download schema.fbs
     if not os.path.exists(FBS_FILE_NAME):
