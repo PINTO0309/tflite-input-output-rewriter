@@ -45,7 +45,9 @@ def main():
         '-v',
         '--view',
         action='store_true',
-        help='Runs in a mode that only displays the signature_defs recorded in the model. This mode does not rewrite the model.'
+        help=\
+            'Runs in a mode that only displays the signature_defs recorded in the model. ' +
+            'This mode does not rewrite the model.'
     )
     parser.add_argument(
         '-o',
@@ -102,7 +104,8 @@ def main():
         # Checks if signature_defs are recorded in tflite
         if 'signature_defs' not in flat_json:
             print(
-                f'{Color.YELLOW}WARNING:{Color.RESET} Processing is aborted because signature_defs is not recorded in tflite.'
+                f'{Color.YELLOW}WARNING:{Color.RESET} ' +
+                f'Processing is aborted because signature_defs is not recorded in tflite.'
             )
             sys.exit(0)
 
@@ -120,7 +123,8 @@ def main():
                 for flat_signature_def_output in flat_signature_def_outputs
         ]
 
-        # If the signature of the input OP and the signature of the output OP overlap, rename the signature of the output OP.
+        # If the signature of the input OP and the signature of the output OP overlap,
+        # rename the signature of the output OP.
         if not view_mode:
             for flat_signature_def_outputs_name in flat_signature_def_outputs_names:
                 if flat_signature_def_outputs_name in flat_signature_def_inputs_names:
@@ -136,10 +140,18 @@ def main():
             print(f'{Color.GREEN}INFO: Overwriting the input OP name to the contents of signature_defs is in progress...{Color.RESET}')
             for flat_signature_def_input in flat_signature_def_inputs:
                 tensor_index: int = flat_signature_def_input.get('tensor_index', -1)
-                input_flat_tensor = [flat_tensor for flat_tensor in flat_tensors if int(flat_tensor['buffer']) == tensor_index + 1]
+                input_flat_tensor = [
+                    flat_tensor \
+                        for flat_tensor in flat_tensors \
+                            if int(flat_tensor['buffer']) == tensor_index + 1
+                ]
                 if input_flat_tensor:
                     input_flat_tensor = input_flat_tensor[0]
-                    print(f'{Color.GREEN}INFO:{Color.RESET} {Color.BLUE}FROM:{Color.RESET} {input_flat_tensor["name"]} {Color.BLUE}TO:{Color.RESET} {flat_signature_def_input["name"]}')
+                    print(
+                        f'{Color.GREEN}INFO:{Color.RESET} ' +
+                        f'{Color.BLUE}FROM:{Color.RESET} {input_flat_tensor["name"]} ' +
+                        f'{Color.BLUE}TO:{Color.RESET} {flat_signature_def_input["name"]}'
+                    )
                     input_flat_tensor['name'] = flat_signature_def_input['name']
 
             # Rewrite output op names
@@ -147,10 +159,18 @@ def main():
             print(f'{Color.GREEN}INFO: Overwriting the output OP name to the contents of signature_defs is in progress...{Color.RESET}')
             for flat_signature_def_output in flat_signature_def_outputs:
                 tensor_index: int = flat_signature_def_output.get('tensor_index', -1)
-                output_flat_tensor = [flat_tensor for flat_tensor in flat_tensors if int(flat_tensor['buffer']) == tensor_index + 1]
+                output_flat_tensor = [
+                    flat_tensor \
+                        for flat_tensor in flat_tensors \
+                            if int(flat_tensor['buffer']) == tensor_index + 1
+                ]
                 if output_flat_tensor:
                     output_flat_tensor = output_flat_tensor[0]
-                    print(f'{Color.GREEN}INFO:{Color.RESET} {Color.BLUE}FROM:{Color.RESET} {output_flat_tensor["name"]} {Color.BLUE}TO:{Color.RESET} {flat_signature_def_output["name"]}')
+                    print(
+                        f'{Color.GREEN}INFO:{Color.RESET} ' +
+                        f'{Color.BLUE}FROM:{Color.RESET} {output_flat_tensor["name"]} ' +
+                        f'{Color.BLUE}TO:{Color.RESET} {flat_signature_def_output["name"]}'
+                    )
                     output_flat_tensor['name'] = flat_signature_def_output['name']
 
         else:
@@ -160,7 +180,11 @@ def main():
             print(f'{Color.GREEN}INFO: Input signature_defs...{Color.RESET}')
             for flat_signature_def_input in flat_signature_def_inputs:
                 tensor_index: int = flat_signature_def_input.get('tensor_index', -1)
-                input_flat_tensor = [flat_tensor for flat_tensor in flat_tensors if int(flat_tensor['buffer']) == tensor_index + 1]
+                input_flat_tensor = [
+                    flat_tensor \
+                        for flat_tensor in flat_tensors \
+                            if int(flat_tensor['buffer']) == tensor_index + 1
+                ]
                 if input_flat_tensor:
                     input_flat_tensor = input_flat_tensor[0]
                     print(
@@ -176,7 +200,11 @@ def main():
             print(f'{Color.GREEN}INFO: Output signature_defs...{Color.RESET}')
             for flat_signature_def_output in flat_signature_def_outputs:
                 tensor_index: int = flat_signature_def_output.get('tensor_index', -1)
-                output_flat_tensor = [flat_tensor for flat_tensor in flat_tensors if int(flat_tensor['buffer']) == tensor_index + 1]
+                output_flat_tensor = [
+                    flat_tensor \
+                        for flat_tensor in flat_tensors \
+                            if int(flat_tensor['buffer']) == tensor_index + 1
+                ]
                 if output_flat_tensor:
                     output_flat_tensor = output_flat_tensor[0]
                     print(
