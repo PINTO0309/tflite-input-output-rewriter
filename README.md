@@ -6,6 +6,8 @@ This tool displays tflite signatures and rewrites the input/output OP name to th
 - flatbuffers-compiler
 
 ## Motivation
+The purpose is to solve the following problems by forcibly rewriting tflite's input/output OP names.
+
 - When TFLite models are generated, TensorFlow automatically prefixes the input OP name with `serving_default_`, resulting in very difficult-to-read models.
 
   ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/094b5290-7d28-463d-80a6-4a485cd818e8)
