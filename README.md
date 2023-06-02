@@ -14,6 +14,11 @@ This tool displays tflite signatures and rewrites the input/output OP name to th
 
   ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/73bda215-f4d2-4fb0-9205-bff4a2e1fb45)
 
+## Execution
+```bash
+python main.py -i xxxx.tflite
+```
+
 ## Execution Result
 - Inputs
 
