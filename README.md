@@ -77,6 +77,7 @@ python main.py \
 -r serving_default_input_1:0 aaa \
 -r StatefulPartitionedCall:0 bbb
 ```
+![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/e2b33158-e044-460f-b032-747339e86feb)
 
 - After
 
