@@ -57,3 +57,4 @@ optional arguments:
 ```bash
 python main.py -i xxxx.tflite -v
 ```
+![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/0d43d93d-647d-40f1-b464-662e39dcf228)
