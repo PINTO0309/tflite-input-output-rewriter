@@ -10,11 +10,11 @@ The purpose is to solve the following problems by forcibly rewriting tflite's in
 
 - When TFLite models are generated, TensorFlow automatically prefixes the input OP name with `serving_default_`, resulting in very difficult-to-read models.
 
-  ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/094b5290-7d28-463d-80a6-4a485cd818e8)
+  ![01](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/c83f4722-aca6-4fd6-910e-b23b20357706)
 
 - Also, the output OP name is arbitrarily rewritten to the unintelligible `StatefulPartitionedCall:n`.
 
-  ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/73bda215-f4d2-4fb0-9205-bff4a2e1fb45)
+  ![02](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/5d73d9e1-cae3-498f-8de6-371a8ddb9ce6)
 
 ## Execution
 ```bash
@@ -26,8 +26,8 @@ python main.py -i xxxx.tflite
 ## Execution Result
 - Inputs
 
-  ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/234d05fa-3926-4a51-a4f8-1e1fd4811304)
+  ![03](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/b0b4bf83-bbcf-4a26-aaf9-86e9feaf69de)
 
 - Outputs
 
-  ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/5ccea34b-9e98-4869-b9e7-9b45fdf6e987)
+  ![04](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/bedffe08-c072-4b07-af8f-d763a2708907)
