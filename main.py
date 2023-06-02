@@ -4,6 +4,7 @@ import json
 import requests
 import subprocess
 from typing import List, Dict
+from argparse import ArgumentParser
 
 class Color:
     BLACK          = '\033[30m'
@@ -32,8 +33,24 @@ class Color:
 
 
 def main():
-    TFLITE_FILE = 'lite-model_movinet_a0_stream_kinetics-600_classification_tflite_float16_2_org.tflite'
-    OUTPUT_PATH = '.'
+    parser = ArgumentParser()
+    parser.add_argument(
+        '-i',
+        '--input_tflite_file_path',
+        required=True,
+        type=str,
+        help='Input tflite file path.'
+    )
+    parser.add_argument(
+        '-o',
+        '--output_folder_path',
+        type=str,
+        default='.',
+        help='Output tflite file folder path.'
+    )
+    args = parser.parse_args()
+    TFLITE_FILE = args.input_tflite_file_path
+    OUTPUT_PATH = args.output_folder_path
     FBS_FILE_NAME = f'schema.fbs'
     URL = f'https://raw.githubusercontent.com/tensorflow/tensorflow/v2.13.0-rc1/tensorflow/lite/schema/{FBS_FILE_NAME}'
 
