@@ -30,9 +30,9 @@ The purpose is to solve the following problems by forcibly rewriting tflite's in
 
     $ docker run --rm -it \
     -v `pwd`:/home/user \
-    ghcr.io/pinto0309/tfliteiorewriter:latest
+    ghcr.io/pinto0309/tflite-input-output-rewriter:latest
 
-    tfliteiorewriter -i xxxx.tflite
+    $ tfliteiorewriter -i xxxx.tflite
     ```
 2. Local
     ```bash
@@ -40,7 +40,7 @@ The purpose is to solve the following problems by forcibly rewriting tflite's in
     # Other than debian/ubuntu: https://github.com/google/flatbuffers/releases
     pip install -U tfliteiorewriter
 
-    tfliteiorewriter -i xxxx.tflite
+    $ tfliteiorewriter -i xxxx.tflite
     ```
 ```
 usage: tfliteiorewriter [-h] -i INPUT_TFLITE_FILE_PATH [-v] [-o OUTPUT_FOLDER_PATH] [-r RENAME RENAME]
