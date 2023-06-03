@@ -3,7 +3,7 @@ import sys
 import json
 import requests
 import subprocess
-from typing import List, Dict
+from typing import List, Dict, Optional
 from argparse import ArgumentParser
 
 class Color:
@@ -35,10 +35,31 @@ class Color:
 def rewrite(
     *,
     tflite_file: str,
-    view_mode: bool,
-    output_path: str,
-    rename_list: List[List[str]],
+    view_mode: Optional[bool] = False,
+    output_path: Optional[str] = '.',
+    rename_list: Optional[List[List[str]]] = [],
 ):
+    """Rewrite tflite input/output names.
+
+    Parameters
+    ----------
+    tflite_file: str
+        Input tflite file path.
+
+    view_mode: Optional[bool]
+        Runs in a mode that only displays the signature_defs recorded in the model.\n
+        This mode does not rewrite the model.\n
+        Default: False
+
+    output_path: Optional[str]
+        Output tflite file folder path.\n
+        Default: "."
+
+    rename_list: Optional[List[List[str]]]
+        Replace with any specified name.\n
+        rename_list = [[{from_name1}, {to_name1}], [{from_name2}, {to_name2}], [{from_name3}, {to_name3}]]\n
+        Default: []
+    """
     TF_VER: str = 'v2.13.0-rc1'
     FBS_FILE_NAME: str = f'schema.fbs'
     URL: str = f'https://raw.githubusercontent.com/tensorflow/tensorflow/{TF_VER}/tensorflow/lite/schema/{FBS_FILE_NAME}'
