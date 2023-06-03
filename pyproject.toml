@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "setuptools_scm"]
+requires = ["setuptools", "setuptools_scm", "requests"]
 build-backend = "setuptools.build_meta"
 
 [project]
