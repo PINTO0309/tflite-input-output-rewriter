@@ -103,26 +103,70 @@ def rewrite(
             flat_json = json.load(f)
 
         # Checks if signature_defs are recorded in tflite
+        enable_signature_defs = True
         if 'signature_defs' not in flat_json or not flat_json['signature_defs']:
+            print('')
             print(
                 f'{Color.YELLOW}WARNING:{Color.RESET} ' +
-                f'Processing is aborted because signature_defs is not recorded in tflite.'
+                f'signature_defs is not recorded in tflite.'
             )
-            sys.exit(0)
+            enable_signature_defs = False
 
         flat_subgraphs = flat_json['subgraphs'][0]
         flat_tensors: List[Dict] = flat_subgraphs['tensors']
-        flat_signature_def: Dict = flat_json['signature_defs'][0]
-        flat_signature_def_inputs: List[Dict] = flat_signature_def['inputs']
-        flat_signature_def_inputs_names = [
-            flat_signature_def_input['name'] \
-                for flat_signature_def_input in flat_signature_def_inputs
-        ]
-        flat_signature_def_outputs: List[Dict] = flat_signature_def['outputs']
-        flat_signature_def_outputs_names = [
-            flat_signature_def_output['name'] \
-                for flat_signature_def_output in flat_signature_def_outputs
-        ]
+        flat_signature_def: Dict = {}
+        flat_signature_def_inputs_names = []
+        flat_signature_def_outputs_names = []
+
+        if enable_signature_defs:
+            # Get the output name to be used for the replacement name from signature_defs
+            # if signature_defs is already defined
+            flat_signature_def = flat_json['signature_defs'][0]
+            flat_signature_def_inputs: List[Dict] = flat_signature_def['inputs']
+            flat_signature_def_inputs_names = [
+                flat_signature_def_input['name'] \
+                    for flat_signature_def_input in flat_signature_def_inputs
+            ]
+            flat_signature_def_outputs: List[Dict] = flat_signature_def['outputs']
+            flat_signature_def_outputs_names = [
+                flat_signature_def_output['name'] \
+                    for flat_signature_def_output in flat_signature_def_outputs
+            ]
+        else:
+            # Generate from tensors if signature_defs is undefined
+            flat_json['signature_defs'] = []
+            flat_subgraphs_inputs: List[int] = flat_subgraphs['inputs']
+            flat_subgraphs_outputs: List[int] = flat_subgraphs['outputs']
+            signature_def_inputs = []
+            signature_def_outputs = []
+            # inputs
+            for idx in flat_subgraphs_inputs:
+                for flat_tensor in flat_tensors:
+                    if int(flat_tensor['buffer']) == idx + 1:
+                        signature_def_inputs.append(
+                            {'name': flat_tensor['name'], 'tensor_index': idx}
+                        )
+                        flat_signature_def_inputs_names.append(flat_tensor['name'])
+                        break
+            # outputs
+            for idx in flat_subgraphs_outputs:
+                for flat_tensor in flat_tensors:
+                    if int(flat_tensor['buffer']) == idx + 1:
+                        signature_def_outputs.append(
+                            {'name': flat_tensor['name'], 'tensor_index': idx}
+                        )
+                        flat_signature_def_outputs_names.append(flat_tensor['name'])
+                        break
+
+            signature_def = {
+                "inputs": signature_def_inputs,
+                "outputs": signature_def_outputs,
+                "signature_key": "serving_default",
+                "subgraph_index": 0,
+            }
+            flat_json['signature_defs'].append(signature_def)
+            flat_signature_def_inputs: List[Dict] = signature_def['inputs']
+            flat_signature_def_outputs: List[Dict] = signature_def['outputs']
 
         # If the signature of the input OP and the signature of the output OP overlap,
         # rename the signature of the output OP.
