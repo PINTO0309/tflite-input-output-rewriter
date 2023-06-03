@@ -19,8 +19,8 @@ jobs:
         python-version: '3.x'
     - name: Install dependencies
       run: |
-        apt-get update
-        apt-get install -y python-is-python3
+        sudo apt-get update
+        sudo apt-get install -y python-is-python3
         python -m pip install --upgrade pip
         python -m pip install build requests
     - name: Build
