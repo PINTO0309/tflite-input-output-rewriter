@@ -5,4 +5,5 @@ __pycache__/
 *.tflite
 *.json
 _version.py
+.bash_history
 schema.fbs

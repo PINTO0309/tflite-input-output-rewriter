@@ -20,13 +20,30 @@ The purpose is to solve the following problems by forcibly rewriting tflite's in
   ![02](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/5d73d9e1-cae3-498f-8de6-371a8ddb9ce6)
 
 ## Execution
-```bash
-sudo apt-get update && sudo apt-get install -y flatbuffers-compiler
+1. Docker
+    ```
+    $ docker login ghcr.io
 
-python tfliteiorewriter/main.py -i xxxx.tflite
+    Username (xxxx): {Enter}
+    Password: {Personal Access Token}
+    Login Succeeded
+
+    $ docker run --rm -it \
+    -v `pwd`:/home/user \
+    ghcr.io/pinto0309/tfliteiorewriter:latest
+
+    tfliteiorewriter -i xxxx.tflite
+    ```
+2. Local
+    ```bash
+    sudo apt-get update && sudo apt-get install -y flatbuffers-compiler
+    # Other than debian/ubuntu: https://github.com/google/flatbuffers/releases
+    pip install -U tfliteiorewriter
+
+    tfliteiorewriter -i xxxx.tflite
+    ```
 ```
-```
-usage: main.py [-h] -i INPUT_TFLITE_FILE_PATH [-v] [-o OUTPUT_FOLDER_PATH] [-r RENAME RENAME]
+usage: tfliteiorewriter [-h] -i INPUT_TFLITE_FILE_PATH [-v] [-o OUTPUT_FOLDER_PATH] [-r RENAME RENAME]
 
 optional arguments:
   -h, --help
@@ -66,7 +83,7 @@ If this tool is run without additional options, it will overwrite the input/outp
 
 ## View Mode Result
 ```bash
-python tfliteiorewriter/main.py -i xxxx.tflite -v
+tfliteiorewriter -i xxxx.tflite -v
 ```
 ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/0d43d93d-647d-40f1-b464-662e39dcf228)
 
@@ -78,7 +95,7 @@ Replace with any name by specifying `{From}` and `{To}` in the `--renmae (-r)` o
   ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/61195485-a756-4449-8bf2-4d9e83f06feb)
 
 ```bash
-python tfliteiorewriter/main.py \
+tfliteiorewriter \
 -i xxxx.tflite \
 -r serving_default_input_1:0 aaa \
 -r StatefulPartitionedCall:0 bbb
