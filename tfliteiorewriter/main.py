@@ -47,17 +47,17 @@ def rewrite(
         Input tflite file path.
 
     view_mode: Optional[bool]
-        Runs in a mode that only displays the signature_defs recorded in the model.\n
-        This mode does not rewrite the model.\n
+        Runs in a mode that only displays the signature_defs recorded in the model.
+        This mode does not rewrite the model.
         Default: False
 
     output_path: Optional[str]
-        Output tflite file folder path.\n
+        Output tflite file folder path.
         Default: "."
 
     rename_list: Optional[List[List[str]]]
-        Replace with any specified name.\n
-        rename_list = [[{from_name1}, {to_name1}], [{from_name2}, {to_name2}], [{from_name3}, {to_name3}]]\n
+        Replace with any specified name.
+        rename_list = [[{from_name1}, {to_name1}], [{from_name2}, {to_name2}], [{from_name3}, {to_name3}]]
         Default: []
     """
     TF_VER: str = 'v2.13.0-rc1'
