@@ -43,7 +43,12 @@ The purpose is to solve the following problems by forcibly rewriting tflite's in
     $ tfliteiorewriter -i xxxx.tflite
     ```
 ```
-usage: tfliteiorewriter [-h] -i INPUT_TFLITE_FILE_PATH [-v] [-o OUTPUT_FOLDER_PATH] [-r RENAME RENAME]
+usage: tfliteiorewriter
+  [-h]
+  -i INPUT_TFLITE_FILE_PATH
+  [-v]
+  [-o OUTPUT_FOLDER_PATH]
+  [-r RENAME RENAME]
 
 optional arguments:
   -h, --help
