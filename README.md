@@ -5,7 +5,7 @@ This tool displays tflite signatures and rewrites the input/output OP name to th
 
 ## Environment
 - Ubuntu 20.04+
-- flatbuffers-compiler
+- flatbuffers-compiler (Note: Official binaries are degraded by lack of precision when processing INT8 quantized tflite files.)
 - requests
 
 ## Motivation
