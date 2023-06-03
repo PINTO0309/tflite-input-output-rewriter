@@ -1,7 +1,7 @@
 # tflite-input-output-rewriter
 This tool displays tflite signatures and rewrites the input/output OP name to the name of the signature. There is no need to install TensorFlow or TFLite.
 
-[![Downloads](https://static.pepy.tech/personalized-badge/tfliteiorewriter?period=total&units=none&left_color=grey&right_color=brightgreen&left_text=Downloads)](https://pepy.tech/project/tfliteiorewriter) ![GitHub](https://img.shields.io/github/license/PINTO0309/tfliteiorewriter?color=2BAF2B) [![Python](https://img.shields.io/badge/Python-3.8-2BAF2B)](https://img.shields.io/badge/Python-3.8-2BAF2B) [![PyPI](https://img.shields.io/pypi/v/tfliteiorewriter?color=2BAF2B)](https://pypi.org/project/tfliteiorewriter/)
+[![Downloads](https://static.pepy.tech/personalized-badge/tfliteiorewriter?period=total&units=none&left_color=grey&right_color=brightgreen&left_text=Downloads)](https://pepy.tech/project/tfliteiorewriter) ![GitHub](https://img.shields.io/github/license/PINTO0309/tflite-input-output-rewriter?color=2BAF2B) [![Python](https://img.shields.io/badge/Python-3.8-2BAF2B)](https://img.shields.io/badge/Python-3.8-2BAF2B) [![PyPI](https://img.shields.io/pypi/v/tfliteiorewriter?color=2BAF2B)](https://pypi.org/project/tfliteiorewriter/)
 
 ## Environment
 - Ubuntu 20.04+
