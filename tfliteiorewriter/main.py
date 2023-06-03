@@ -103,7 +103,7 @@ def rewrite(
             flat_json = json.load(f)
 
         # Checks if signature_defs are recorded in tflite
-        if 'signature_defs' not in flat_json:
+        if 'signature_defs' not in flat_json or not flat_json['signature_defs']:
             print(
                 f'{Color.YELLOW}WARNING:{Color.RESET} ' +
                 f'Processing is aborted because signature_defs is not recorded in tflite.'
