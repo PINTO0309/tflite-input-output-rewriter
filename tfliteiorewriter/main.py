@@ -253,8 +253,7 @@ def rewrite(
             'Other than debian/ubuntu: https://github.com/google/flatbuffers/releases'
         )
 
-
-if __name__ == '__main__':
+def cli():
     parser = ArgumentParser()
     parser.add_argument(
         '-i',
@@ -299,3 +298,7 @@ if __name__ == '__main__':
         output_path=output_path,
         rename_list=rename_list,
     )
+
+if __name__ == '__main__':
+    cli()
+

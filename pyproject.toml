@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tfliteiorewriter"
+description = "This tool displays tflite signatures and rewrites the input/output OP name to the name of the signature. There is no need to install TensorFlow or TFLite."
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "requests"
+]
+dynamic = ["version"]
+
+[tool.setuptools.packages.find]
+exclude = ["build", "tests"]
+
+[tool.setuptools.dynamic]
+version = {attr = "tfliteiorewriter.version"}
+
+[tool.setuptools_scm]
+write_to = "tfliteiorewriter/_version.py"
+
+[project.scripts]
+tfliteiorewriter = "tfliteiorewriter.main:cli"

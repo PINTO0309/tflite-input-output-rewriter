@@ -4,6 +4,7 @@ This tool displays tflite signatures and rewrites the input/output OP name to th
 ## Environment
 - Ubuntu 20.04+
 - flatbuffers-compiler
+- requests
 
 ## Motivation
 The purpose is to solve the following problems by forcibly rewriting tflite's input/output OP names.
@@ -20,7 +21,7 @@ The purpose is to solve the following problems by forcibly rewriting tflite's in
 ```bash
 sudo apt-get update && sudo apt-get install -y flatbuffers-compiler
 
-python main.py -i xxxx.tflite
+python tfliteiorewriter/main.py -i xxxx.tflite
 ```
 ```
 usage: main.py [-h] -i INPUT_TFLITE_FILE_PATH [-v] [-o OUTPUT_FOLDER_PATH] [-r RENAME RENAME]
@@ -62,7 +63,7 @@ optional arguments:
 
 ## View Mode Result
 ```bash
-python main.py -i xxxx.tflite -v
+python tfliteiorewriter/main.py -i xxxx.tflite -v
 ```
 ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/0d43d93d-647d-40f1-b464-662e39dcf228)
 
@@ -74,7 +75,7 @@ Replace with any name by specifying `{From}` and `{To}` in the `--renmae (-r)` o
   ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/61195485-a756-4449-8bf2-4d9e83f06feb)
 
 ```bash
-python main.py \
+python tfliteiorewriter/main.py \
 -i xxxx.tflite \
 -r serving_default_input_1:0 aaa \
 -r StatefulPartitionedCall:0 bbb
