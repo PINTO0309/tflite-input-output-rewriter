@@ -8,8 +8,8 @@ RUN apt-get update \
     && apt-get install -y \
         python3-pip \
         python-is-python3 \
-        flatbuffers-compiler \
         sudo \
+        wget \
     && pip install -U pip \
     && pip install -U tfliteiorewriter \
     && pip install -U tfliteiorewriter \
@@ -31,3 +31,9 @@ RUN echo "root:root" | chpasswd \
         /etc/sudoers.d/${USERNAME}
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
+
+RUN wget https://github.com/PINTO0309/onnx2tf/releases/download/1.7.3/flatc.tar.gz \
+    && tar -zxvf flatc.tar.gz \
+    && sudo chmod +x flatc \
+    && sudo mv flatc /usr/bin/ \
+    && rm flatc.tar.gz
