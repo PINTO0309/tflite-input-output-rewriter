@@ -53,6 +53,7 @@ optional arguments:
 ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/d58dca0f-ac51-4545-b49b-32f22e7a39ad)
 
 ## Execution Result
+If this tool is run without additional options, it will overwrite the input/output OP names for Netron display with the input/output name definition information in `signature_defs`.
 - Inputs
 
   ![03](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/b0b4bf83-bbcf-4a26-aaf9-86e9feaf69de)
