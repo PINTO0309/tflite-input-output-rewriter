@@ -36,9 +36,9 @@ The purpose is to solve the following problems by forcibly rewriting tflite's in
     ```
 2. Local
     ```bash
-    sudo apt-get update && sudo apt-get install -y flatbuffers-compiler
+    $ sudo apt-get update && sudo apt-get install -y flatbuffers-compiler
     # Other than debian/ubuntu: https://github.com/google/flatbuffers/releases
-    pip install -U tfliteiorewriter
+    $ pip install -U tfliteiorewriter
 
     $ tfliteiorewriter -i xxxx.tflite
     ```
