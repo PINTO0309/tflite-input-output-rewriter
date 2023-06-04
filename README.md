@@ -99,13 +99,13 @@ Replace with any name by specifying `{From}` and `{To}` in the `--renmae (-r)` o
 
   ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/61195485-a756-4449-8bf2-4d9e83f06feb)
 
-```bash
-tfliteiorewriter \
--i xxxx.tflite \
--r serving_default_input_1:0 aaa \
--r StatefulPartitionedCall:0 bbb
-```
-![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/e2b33158-e044-460f-b032-747339e86feb)
+  ```bash
+  tfliteiorewriter \
+  -i xxxx.tflite \
+  -r serving_default_input_1:0 aaa \
+  -r StatefulPartitionedCall:0 bbb
+  ```
+  ![image](https://github.com/PINTO0309/tflite-input-output-rewriter/assets/33194443/e2b33158-e044-460f-b032-747339e86feb)
 
 - After
 
