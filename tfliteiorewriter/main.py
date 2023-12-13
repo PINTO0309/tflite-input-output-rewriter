@@ -60,9 +60,9 @@ def rewrite(
         rename_list = [[{from_name1}, {to_name1}], [{from_name2}, {to_name2}], [{from_name3}, {to_name3}]]
         Default: []
     """
-    TF_VER: str = 'v2.13.0-rc1'
+    TF_VER: str = 'r2.15'
     FBS_FILE_NAME: str = f'schema.fbs'
-    URL: str = f'https://raw.githubusercontent.com/tensorflow/tensorflow/{TF_VER}/tensorflow/lite/schema/{FBS_FILE_NAME}'
+    URL: str = f'https://raw.githubusercontent.com/tensorflow/tensorflow/{TF_VER}/tensorflow/lite/schema//{FBS_FILE_NAME}'
 
     # Download schema.fbs
     if not os.path.exists(FBS_FILE_NAME):
